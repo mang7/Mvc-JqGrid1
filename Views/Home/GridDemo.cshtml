@@ -1,0 +1,71 @@
+﻿@*@model Mvc_JqGrid1.Models.OrdersJqGridModel
+@using Trirand.Web.Mvc
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqGrid")
+    @Styles.Render("~/Content/themes/base/css")
+    @Styles.Render("~/Content/themes/base/jqGridcss")
+}
+<body>
+    <div>
+        @Html.Trirand().JQGrid(Model.OrdersGrid, "JQGrid1")
+    </div>
+</body>*@
+@model Mvc_JqGrid1.Models.OrdersJqGridModel
+@using Trirand.Web.Mvc
+
+<!doctype html>
+<html lang="en">
+<head runat="server">
+    <title>jqGrid for ASP.NET MVC - Demo</title>
+    <!-- The Css UI theme extension of jqGrid -->
+    <link rel="stylesheet" type="text/css" href="~/Content/themes/base/ui.jqgrid.css" />    
+    <!-- language pack - MUST be included before the jqGrid javascript -->
+    <script type="text/javascript" src="~/Scripts/trirand/i18n/grid.locale-en.js"></script>
+    <!-- the jqGrid javascript runtime -->
+    <script type="text/javascript" src="~/Scripts/trirand/jquery.jqGrid.min.js"></script> 
+    <script type="text/javascript" src="~/Scripts/trirand/jquery.jqDatePicker.min.js"></script>       
+    <script type="text/javascript" src="~/Scripts/jquery-ui-timepicker-addon.js"></script>       
+</head>
+<body>
+    <div>
+        @Html.Trirand().JQGrid(Model.OrdersGrid, "JQGrid1")
+        @*@Html.Trirand().JQDatePicker(
+            new JQDatePicker 
+            { 
+                DisplayMode = DatePickerDisplayMode.ControlEditor,
+                ShowOn = ShowOn.Focus,                    
+                DateFormat = "yyyy/MM/dd",
+                TimeFormat = "HH:MM",
+                MinDate = DateTime.MinValue,
+                MaxDate = DateTime.MaxValue
+            }, "DatePicker")*@
+        <script type="text/javascript">
+            function createOrderDateEditElement(value, editOptions) {
+                var span = $("<span style='Position:absolute; display:none'>");
+
+                span.datetimepicker();
+                return span;
+            }
+            function getOrderDateElementValue(elem) {
+                alert($(elem).find("span").val());
+                return $(elem).find("span").val();
+            }
+            $(document).ready(function () {
+                console.log($('[name="OrderDate"]').parent().parent());
+                $('td')
+                $('[name="OrderDate"]').parent().parent().click(function () {
+                    alert(1);
+                    $('[name="OrderDate"]').show();
+                })
+                
+            });
+
+    </script>
+    </div>
+</body>
+</html>
+@section scripts{
+    @Styles.Render("~/Content/themes/base/css")
+}
